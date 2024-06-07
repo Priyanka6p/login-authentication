@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import LoginForm from './components/LoginForm';
+import Logout from './components/Logout';
 
 function App() {
+
+  let email = localStorage.getItem('email');
+  console.log(email);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={email? <Home /> : <LoginForm/>} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/logout' element={<Logout />} />
+        <Route path='/login' element={<LoginForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
